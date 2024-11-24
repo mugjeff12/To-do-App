@@ -1,4 +1,6 @@
-def get_todos(filepath = 'todos.txt'): # when i set filepath to todos.txt i make it a default parameter
+FILE_PATH='todos.txt'
+
+def get_todos(filepath = FILE_PATH): # when i set filepath to todos.txt i make it a default parameter
     """Reads a text file
     and returns the items in the list
     """
@@ -7,7 +9,7 @@ def get_todos(filepath = 'todos.txt'): # when i set filepath to todos.txt i make
         todos=file.readlines()
     return todos
 
-def write_todos(filepath,todos_arg):
+def write_todos(todos_arg,filepath = FILE_PATH):
     """Write the todo items list in the text file"""
     #always make sure non default parameter is before default parameter
     # i wont use it but the function definition will look like

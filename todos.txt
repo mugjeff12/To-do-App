@@ -6,3 +6,5 @@ Run
 Close The Deal
 Fight
 Clean The Car
+Master python
+Dance
