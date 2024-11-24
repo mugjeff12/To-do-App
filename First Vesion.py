@@ -5,7 +5,7 @@ text = 'show'
 #print(text[1:]) # should be bcde
 #print(text[1:2])#should be b
 #underlying logic :  right number is inclusive , left number is exclusive , everything in between
-
+#fdsfs
 while True:
     #ardit wanted to introduce list slicing
     #so he wanted the user action to be add Fix the computer
