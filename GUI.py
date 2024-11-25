@@ -2,6 +2,9 @@
 import functions
 
 import FreeSimpleGUI
+import time
+FreeSimpleGUI.theme("DarkBlack1")
+clock=FreeSimpleGUI.Text(key='clock')
 label = FreeSimpleGUI.Text("Type in a to-do")
 input_box = FreeSimpleGUI.InputText(tooltip="Enter To-do: ", key ='todo')
 add_button = FreeSimpleGUI.Button("Add")
@@ -12,7 +15,7 @@ edit_button = FreeSimpleGUI.Button('Edit')
 complete_button = FreeSimpleGUI.Button('Complete')
 exit_button=FreeSimpleGUI.Button('Exit')
 window=FreeSimpleGUI.Window('My To-do App',
-                            layout=[[label]
+                            layout=[[clock],[label]
                                 ,[input_box,add_button],
                                 [list_box,edit_button,complete_button],
                                     [exit_button]],
@@ -23,7 +26,8 @@ window=FreeSimpleGUI.Window('My To-do App',
 #if we placed them in a seperate sq bracket , then they would be in different rows
 #window=FreeSimpleGUI.Window('My To-do App',layout=[[label],[input_box]])#an instance of the Window type stored in the variable, window
 while True:
-    event,values=window.read()
+    event,values=window.read(timeout=200)
+    window['clock'].update(value=time.strftime("%b %D,%Y %H:%M:%S"))
     print(event)#add
     print(values)#{'todo': hi} this is a dictionary , extract using values['todo']
     match event:
@@ -34,13 +38,16 @@ while True:
             functions.write_todos(todos)
             window['todos'].update(values=todos)
         case "Edit":
-            todo_to_edit =  values["todos"][0]
-            todo_to_add = values["todo"]
-            todos = functions.get_todos()
-            index = todos.index(todo_to_edit)
-            todos[index]=todo_to_add + '\n'
-            functions.write_todos(todos)
-            window['todos'].update(values=todos)
+            try:
+                todo_to_edit =  values["todos"][0]
+                todo_to_add = values["todo"]
+                todos = functions.get_todos()
+                index = todos.index(todo_to_edit)
+                todos[index]=todo_to_add + '\n'
+                functions.write_todos(todos)
+                window['todos'].update(values=todos)
+            except IndexError:
+                FreeSimpleGUI.popup("Please select an item first.",font=('TimesNewRoman','20'))
         #case 'todos':
         #window['todo'].update(value=values['todos'][0])
         case 'todos':
