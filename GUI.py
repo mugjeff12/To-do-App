@@ -3,6 +3,13 @@ import functions
 
 import FreeSimpleGUI
 import time
+
+import os
+
+if not os.path.exists('todos.txt'):
+    with open('todos.txt','w') as file:
+        pass
+
 FreeSimpleGUI.theme("DarkBlack1")
 clock=FreeSimpleGUI.Text(key='clock')
 label = FreeSimpleGUI.Text("Type in a to-do")
